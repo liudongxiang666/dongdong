@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#24170f" />
+  <meta name="description" content="三国群英传：一款可离线运行的攻城建造策略游戏" />
+  <title>三国群英传</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">荆州 · 柴桑城</div>
+        <h1>三国群英传</h1>
+      </div>
+      <button id="soundBtn" class="round-btn" aria-label="切换音效">♬</button>
+    </header>
+
+    <main>
+      <section class="resource-bar" aria-label="资源">
+        <div class="resource"><span>粮</span><strong id="food">0</strong><small id="foodRate">+0/分</small></div>
+        <div class="resource"><span>木</span><strong id="wood">0</strong><small id="woodRate">+0/分</small></div>
+        <div class="resource"><span>石</span><strong id="stone">0</strong><small id="stoneRate">+0/分</small></div>
+        <div class="resource"><span>铜</span><strong id="coin">0</strong><small id="coinRate">+0/分</small></div>
+      </section>
+
+      <section id="view-city" class="view active">
+        <div class="city-banner">
+          <div>
+            <span class="tag">主城</span>
+            <h2 id="cityName">柴桑城</h2>
+          </div>
+          <div class="power">战力 <strong id="power">0</strong></div>
+        </div>
+
+        <div class="map" id="map">
+          <button class="building central" data-building="hall">
+            <span class="building-icon">殿</span><strong>主公府</strong><small id="level-hall">Lv.1</small>
+          </button>
+          <button class="building top" data-building="farm">
+            <span class="building-icon">田</span><strong>屯田所</strong><small id="level-farm">Lv.1</small>
+          </button>
+          <button class="building left" data-building="lumber">
+            <span class="building-icon">林</span><strong>木场</strong><small id="level-lumber">Lv.1</small>
+          </button>
+          <button class="building right" data-building="quarry">
+            <span class="building-icon">石</span><strong>石场</strong><small id="level-quarry">Lv.1</small>
+          </button>
+          <button class="building bottom" data-building="barracks">
+            <span class="building-icon">兵</span><strong>校场</strong><small id="level-barracks">Lv.1</small>
+          </button>
+        </div>
+
+        <div class="quest-card">
+          <div>
+            <span class="quest-tag">主线</span>
+            <strong id="questTitle">扩充粮仓</strong>
+            <p id="questText">将屯田所升至 2 级</p>
+          </div>
+          <button id="claimQuest" class="small-btn" disabled>领取</button>
+        </div>
+      </section>
+
+      <section id="view-army" class="view">
+        <div class="section-title"><div><span class="eyebrow">麾下将领</span><h2>武将与兵力</h2></div></div>
+        <div class="army-summary">
+          <div><span>步兵</span><strong id="infantry">200</strong></div>
+          <div><span>骑兵</span><strong id="cavalry">50</strong></div>
+          <div><span>士气</span><strong id="morale">100</strong></div>
+        </div>
+        <div id="heroList" class="card-list"></div>
+        <button id="recruitBtn" class="primary-btn">招募将领 <span>消耗 300 铜钱</span></button>
+      </section>
+
+      <section id="view-war" class="view">
+        <div class="section-title"><div><span class="eyebrow">烽火连天</span><h2>攻占城池</h2></div></div>
+        <div id="battleList" class="battle-list"></div>
+      </section>
+
+      <section id="view-collect" class="view">
+        <div class="section-title"><div><span class="eyebrow">巡查四方</span><h2>资源采集</h2></div></div>
+        <div class="collect-grid">
+          <button class="collect-card" data-gather="food"><span>🌾</span><strong>野田</strong><small>获得粮食</small></button>
+          <button class="collect-card" data-gather="wood"><span>🌲</span><strong>密林</strong><small>获得木材</small></button>
+          <button class="collect-card" data-gather="stone"><span>🪨</span><strong>山石</strong><small>获得石料</small></button>
+          <button class="collect-card" data-gather="coin"><span>🏮</span><strong>商镇</strong><small>获得铜钱</small></button>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="主导航">
+      <button class="nav-btn active" data-view="city"><span>城</span><small>城池</small></button>
+      <button class="nav-btn" data-view="army"><span>将</span><small>武将</small></button>
+      <button class="nav-btn" data-view="war"><span>战</span><small>征伐</small></button>
+      <button class="nav-btn" data-view="collect"><span>采</span><small>采集</small></button>
+    </nav>
+
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-sheet">
+        <button id="modalClose" class="modal-close">×</button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
